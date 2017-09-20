@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EcommerceApp.Pages.LoginPage"
+              BindingContext="{Binding Main, Source={StaticResource Locator}}"
+              xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+             Title="E-Commerce" BackgroundColor="{StaticResource BackgroundColor}">
+
+    <StackLayout Padding="10" Spacing="20" BindingContext="{Binding Newlogin}">
+        
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+            <Label Text="Industrias Femco S.R.L"
+                    FontSize="18" FontAttributes="Bold" TextColor="{StaticResource MainColor}"
+                  VerticalTextAlignment="Center"  />
+            <controls:CircleImage  Source="icon.png" Margin="2" Aspect="AspectFill"
+                      WidthRequest="80" HeightRequest="80"
+                      VerticalOptions="Center">
+            </controls:CircleImage>
+        </StackLayout>
+        <BoxView HeightRequest="3"  Color="{StaticResource MainColor}"/>
+
+        <Entry Placeholder="Usuario"  Text="{Binding User,Mode=TwoWay}" TextColor="Black" />
+        <Entry Placeholder="Contraseña"  IsPassword="True" Text="{Binding PassWord,Mode=TwoWay}" TextColor="Black"/>
+        <Button Text=" Ingresar" BackgroundColor="{StaticResource MainColor}" TextColor="White" Command="{Binding LoginCommand}"/>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+            <Label Text="Recuerdame" VerticalOptions="Center" HorizontalOptions="Center" TextColor="Black"/>
+            <Switch HorizontalOptions="Center" IsToggled="{Binding IsRemembered,Mode=TwoWay}" />
+        </StackLayout>
+        <Label Text="¿Has olvidado tu contraseña?" VerticalOptions="Center" HorizontalOptions="Center" TextColor="Black"/>
+    </StackLayout>
+</ContentPage>

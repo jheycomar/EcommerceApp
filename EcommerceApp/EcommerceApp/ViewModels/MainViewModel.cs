@@ -9,11 +9,17 @@ namespace EcommerceApp.ViewModels
 {
     public class MainViewModel
     {
+        #region Properties
         public ObservableCollection<MenuItemViewModel> Menu { get; set; }
-      
+        public LoginViewModel Newlogin { get; set; } 
+
+        #endregion
+
         #region constructor
         public MainViewModel()
         {
+            Menu = new ObservableCollection<MenuItemViewModel>();
+            Newlogin = new LoginViewModel();
             LoadMenu();
         }
         #endregion
@@ -21,11 +27,9 @@ namespace EcommerceApp.ViewModels
         #region Methos
         private void LoadMenu()
         {
-            Menu = new ObservableCollection<MenuItemViewModel>();
-
             Menu.Add(new MenuItemViewModel
             {
-                Icon = "producto.png",
+                Icon = "shoping.png",
                 PageName = "ProductsPage",
                 Title = "Productos",
             });
@@ -39,7 +43,7 @@ namespace EcommerceApp.ViewModels
 
             Menu.Add(new MenuItemViewModel
             {
-                Icon = "AddTag.png",
+                Icon = "pedidos.png",
                 PageName = "OrdersPage",
                 Title = "Pedidos",
             });

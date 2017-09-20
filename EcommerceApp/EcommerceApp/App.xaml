@@ -11,6 +11,8 @@
             <Color x:Key="AccentColor">#cdff00</Color>
             <Color x:Key="MenuColor">#a3abaf</Color>
             <Color x:Key="BackgroundColor">#ffffff</Color>
+            <Color x:Key="Btncolor">#2E545A</Color>
+            
             <!-- Locator -->
             <infra:InstanceLocator x:Key="Locator"></infra:InstanceLocator>
 
