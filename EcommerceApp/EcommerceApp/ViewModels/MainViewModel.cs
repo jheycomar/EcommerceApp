@@ -1,4 +1,6 @@
-﻿using System;
+﻿using EcommerceApp.Models;
+using EcommerceApp.Services;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -9,22 +11,39 @@ namespace EcommerceApp.ViewModels
 {
     public class MainViewModel
     {
+        #region Attributes
+        private DateService dateService; 
+        #endregion
+
         #region Properties
         public ObservableCollection<MenuItemViewModel> Menu { get; set; }
-        public LoginViewModel Newlogin { get; set; } 
+        public LoginViewModel Newlogin { get; set; }
+        public UserViewModel UserLoget { get; set; }
 
         #endregion
 
         #region constructor
         public MainViewModel()
         {
+            instance = this;
             Menu = new ObservableCollection<MenuItemViewModel>();
             Newlogin = new LoginViewModel();
+            UserLoget = new UserViewModel();
+            dateService = new DateService();
             LoadMenu();
+           
         }
+
+
         #endregion
 
         #region Methos
+        public void LoadUser(User user)
+        {
+           UserLoget.FullName = user.FullName;
+           UserLoget.Photo = user.PhotoFullPath;         
+           
+        }
         private void LoadMenu()
         {
             Menu.Add(new MenuItemViewModel
@@ -70,10 +89,26 @@ namespace EcommerceApp.ViewModels
             {
                 Icon = "Salir.png",
                 PageName = "LogutPage",
-                Title = "Salir",
+                Title = "Cerrar sesion",
             });
-        } 
+        }
         #endregion
+        #region Singleton
+
+        static MainViewModel instance;
+
+        public static MainViewModel GetInstance()
+        {
+            if (instance == null)
+            {
+                instance = new MainViewModel();
+            }
+
+            return instance;
+        }
+
+        #endregion
+
 
     }
 }

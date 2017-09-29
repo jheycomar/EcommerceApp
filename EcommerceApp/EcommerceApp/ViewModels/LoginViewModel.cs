@@ -1,7 +1,9 @@
-﻿using EcommerceApp.Services;
+﻿using EcommerceApp.Models;
+using EcommerceApp.Services;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,12 +11,16 @@ using System.Windows.Input;
 
 namespace EcommerceApp.ViewModels
 {
-    public class LoginViewModel
+    public class LoginViewModel:INotifyPropertyChanged
     {
         #region Attributes
         private NavigationService navigationService;
 
         private DialogService dialogService;
+
+        private ApiService apiService;
+
+        private DateService dateService;
 
         #endregion
 
@@ -22,6 +28,22 @@ namespace EcommerceApp.ViewModels
         public string User { get; set; }
         public string PassWord { get; set; }
         public bool IsRemembered { get; set; }
+   
+        private bool isRunning;
+
+        public bool IsRunning
+        {
+          set
+            {
+                if (isRunning != value)
+                {
+                    isRunning = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsRunning"));
+                }
+            }
+            get { return isRunning; }
+        }
+
         #endregion
 
         #region Constructors
@@ -29,6 +51,8 @@ namespace EcommerceApp.ViewModels
         { 
             navigationService = new NavigationService();
             dialogService = new DialogService();
+            apiService = new ApiService();
+            dateService = new DateService();
             IsRemembered = true;
         } 
         #endregion
@@ -48,9 +72,26 @@ namespace EcommerceApp.ViewModels
                 await dialogService.ShowMessage("Error", "Debes ingresar una contraseña");
                 return;
             }
+            IsRunning = true;
+            var response = await apiService.Login(User,PassWord);
+            IsRunning = false;
+            if (!response.IsSucces)
+            {
+                await dialogService.ShowMessage("Error", response.Message);
+                return;
 
-            navigationService.SetMainPage();
-        } 
+            }
+            var user = (User)response.Result;
+            user.IsRemembered = IsRemembered;
+            user.Password = PassWord;
+            dateService.InsertUser(user);
+
+            navigationService.SetMainPage(user);
+        }
+        #endregion
+
+        #region Events
+        public event PropertyChangedEventHandler PropertyChanged; 
         #endregion
     }
 }

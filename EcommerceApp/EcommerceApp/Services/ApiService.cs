@@ -1,4 +1,5 @@
 ﻿using EcommerceApp.Clases;
+using EcommerceApp.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,42 @@ namespace EcommerceApp.Services
 {
     public class ApiService
     {
+        public async Task<Response> Login(string email,string password)
+        {
+            try
+            {
+                var loginRequest = new LoginRequest { Email=email,Password =password};
+
+                var request = JsonConvert.SerializeObject(loginRequest);
+                var content = new StringContent(request, Encoding.UTF8, "application/json");
+                var client = new HttpClient();
+                client.BaseAddress = new Uri("http://ecomerce.somee.com");
+                var url = "/api/Users/Login";
+
+                var response = await client.PostAsync(url, content);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response { IsSucces = false, Message = response.StatusCode.ToString(),};
+                }
+                var result = await response.Content.ReadAsStringAsync();
+                var user = JsonConvert.DeserializeObject<User>(result);
+
+                return new Response
+                {
+                    IsSucces = true,
+                    Message = "Login OK",
+                    Result = user,
+                };
+
+            }
+            catch (Exception ex)
+            {
+
+                return new Response { IsSucces=false,Message=ex.Message};
+            }
+
+        }
         public async Task<Response> Get<T>(string urlBase, string servicePrefix, string controller)
         {
             try

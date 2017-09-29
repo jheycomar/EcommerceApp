@@ -9,7 +9,7 @@
     <StackLayout Padding="10" Spacing="20" BindingContext="{Binding Newlogin}">
         
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-            <Label Text="Industrias Femco S.R.L"
+            <Label Text="E-commerce"
                     FontSize="18" FontAttributes="Bold" TextColor="{StaticResource MainColor}"
                   VerticalTextAlignment="Center"  />
             <controls:CircleImage  Source="icon.png" Margin="2" Aspect="AspectFill"
@@ -19,9 +19,10 @@
         </StackLayout>
         <BoxView HeightRequest="3"  Color="{StaticResource MainColor}"/>
 
-        <Entry Placeholder="Usuario"  Text="{Binding User,Mode=TwoWay}" TextColor="Black" />
+        <Entry Placeholder="Usuario" Keyboard="Email" Text="{Binding User,Mode=TwoWay}" TextColor="Black" />
         <Entry Placeholder="Contraseña"  IsPassword="True" Text="{Binding PassWord,Mode=TwoWay}" TextColor="Black"/>
         <Button Text=" Ingresar" BackgroundColor="{StaticResource MainColor}" TextColor="White" Command="{Binding LoginCommand}"/>
+        <ActivityIndicator HorizontalOptions="Center" VerticalOptions="Center" IsRunning="{Binding IsRunning}"/>
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
             <Label Text="Recuerdame" VerticalOptions="Center" HorizontalOptions="Center" TextColor="Black"/>
             <Switch HorizontalOptions="Center" IsToggled="{Binding IsRemembered,Mode=TwoWay}" />

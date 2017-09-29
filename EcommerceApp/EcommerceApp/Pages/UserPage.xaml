@@ -2,10 +2,18 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EcommerceApp.Pages.UserPage"
-             Title="UserPage" BackgroundColor="{StaticResource BackgroundColor}">
+             Title="UserPage" BackgroundColor="{StaticResource BackgroundColor}"
+              BindingContext="{Binding Main, Source={StaticResource Locator}}"
+               xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin Forms!" />
+        <StackLayout VerticalOptions="CenterAndExpand" Padding="8" BindingContext="{Binding UserLoget}">
+            <Label Text="Welcomen" FontAttributes="Bold" FontSize="18" VerticalOptions="Center" HorizontalOptions="Center"/>
+            <Label Text="{Binding FullName}" FontAttributes="Bold" FontSize="18" VerticalOptions="Center" HorizontalOptions="Center"/>
+            <Image Source="{Binding Photo}" WidthRequest="200" HeightRequest="200"/>
+            <controls:CircleImage  Source="{Binding Photo }" Margin="2" Aspect="AspectFill"
+                      WidthRequest="80" HeightRequest="80"
+                      HorizontalOptions="End" VerticalOptions="Center">
+            </controls:CircleImage>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

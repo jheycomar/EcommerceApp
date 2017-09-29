@@ -1,4 +1,6 @@
-﻿using EcommerceApp.Pages;
+﻿using EcommerceApp.Models;
+using EcommerceApp.Pages;
+using EcommerceApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +11,11 @@ namespace EcommerceApp.Services
 {
     public class NavigationService
     {
+        private DateService dateService;
+        public NavigationService()
+        {
+            dateService = new DateService();
+        }
         public async Task Navigate(string pageName)
         {
             App.Master.IsPresented = false;
@@ -36,14 +43,32 @@ namespace EcommerceApp.Services
                 case "UserPage":
                     await App.Navigator.PushAsync(new UserPage());
                     break;
+                case "LogutPage":
+                    logaut();
 
+                    break;
                 default:
                     break;
             }
         }
 
-        internal void SetMainPage()
+      public User GetCurrentUser()
         {
+            return App.CurrentUser;
+        }
+
+        private void logaut()
+        {
+            App.CurrentUser.IsRemembered = false;
+            dateService.UpdateUser(App.CurrentUser);
+            App.Current.MainPage = new LoginPage();
+        }
+
+        internal void SetMainPage(User user)
+        {
+            var mainViewmodel = MainViewModel.GetInstance();
+            mainViewmodel.LoadUser(user);
+            App.CurrentUser = user;
             App.Current.MainPage = new MasterPage();
         }
     }

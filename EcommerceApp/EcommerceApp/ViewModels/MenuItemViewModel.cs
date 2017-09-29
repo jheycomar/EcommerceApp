@@ -27,13 +27,14 @@ namespace EcommerceApp.ViewModels
         }
         #region Commands
         public ICommand NavigateCommand { get { return new RelayCommand(Navigate); } }
-        #endregion
-
-        #region Metodos
         private async void Navigate()
         {
             await navigationService.Navigate(PageName);
-        } 
+        }
+        #endregion
+
+        #region Metodos
+
         #endregion
     }
 }
