@@ -8,11 +8,10 @@
     <ContentPage.Content>
         <StackLayout VerticalOptions="CenterAndExpand" Padding="8" BindingContext="{Binding UserLoget}">
             <Label Text="Welcomen" FontAttributes="Bold" FontSize="18" VerticalOptions="Center" HorizontalOptions="Center"/>
-            <Label Text="{Binding FullName}" FontAttributes="Bold" FontSize="18" VerticalOptions="Center" HorizontalOptions="Center"/>
-            <Image Source="{Binding Photo}" WidthRequest="200" HeightRequest="200"/>
+            <Label Text="{Binding FullName}" FontAttributes="Bold" FontSize="18" VerticalOptions="Center" HorizontalOptions="Center"/>           
             <controls:CircleImage  Source="{Binding Photo }" Margin="2" Aspect="AspectFill"
-                      WidthRequest="80" HeightRequest="80"
-                      HorizontalOptions="End" VerticalOptions="Center">
+                      WidthRequest="150" HeightRequest="150"
+                      HorizontalOptions="Center" VerticalOptions="Center">
             </controls:CircleImage>
         </StackLayout>
     </ContentPage.Content>
