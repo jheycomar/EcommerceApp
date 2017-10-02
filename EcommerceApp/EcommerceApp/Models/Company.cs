@@ -11,6 +11,7 @@ namespace EcommerceApp.Models
     public  class Company
     {
         [PrimaryKey]
+        
         public int CompanyId { get; set; }
         public string Name { get; set; }
         public string Phone { get; set; }
@@ -18,6 +19,7 @@ namespace EcommerceApp.Models
         public string Logo { get; set; }
         public int DepartmentId { get; set; }
         public string CityId { get; set; }
+
         [OneToMany(CascadeOperations = CascadeOperation.All)]
         public List<User> Users { get; set; }
 

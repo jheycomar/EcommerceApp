@@ -28,6 +28,7 @@ namespace EcommerceApp
         {
             InitializeComponent();
             var user = dateService.GetUser();
+
             if (user!=null && user.IsRemembered)
             {
                 var mainViewmodel = MainViewModel.GetInstance();

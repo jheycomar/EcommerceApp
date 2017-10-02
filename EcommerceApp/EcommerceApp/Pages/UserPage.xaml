@@ -5,6 +5,13 @@
              Title="UserPage" BackgroundColor="{StaticResource BackgroundColor}"
               BindingContext="{Binding Main, Source={StaticResource Locator}}"
                xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="inicio" Order="Secondary" Priority="0"/>
+        <ToolbarItem Name="menu" Order="Secondary" Priority="2"/>
+
+    </ContentPage.ToolbarItems>
+    
+    
     <ContentPage.Content>
         <StackLayout VerticalOptions="CenterAndExpand" Padding="8" BindingContext="{Binding UserLoget}">
             <Label Text="Welcomen" FontAttributes="Bold" FontSize="18" VerticalOptions="Center" HorizontalOptions="Center"/>

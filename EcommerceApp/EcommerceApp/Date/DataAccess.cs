@@ -36,9 +36,9 @@ namespace EcommerceApp.Date
             connection.Delete(model);
         }
 
-        public T First<T>(bool WithChildren) where T : class
+        public T First<T>(bool withChildren) where T : class
         {
-            if (WithChildren)
+            if (withChildren)
             {
                 return connection.GetAllWithChildren<T>().FirstOrDefault();
             }
@@ -48,9 +48,9 @@ namespace EcommerceApp.Date
             }
         }
 
-        public List<T> GetList<T>(bool WithChildren) where T : class
+        public List<T> GetList<T>(bool withChildren) where T : class
         {
-            if (WithChildren)
+            if (withChildren)
             {
                 return connection.GetAllWithChildren<T>().ToList();
             }

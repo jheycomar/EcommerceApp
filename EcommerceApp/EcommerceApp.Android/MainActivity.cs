@@ -21,6 +21,12 @@ namespace EcommerceApp.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App());
+
+
+
+            //var tv = FindViewById(Resource.Id.mySearchView) as SearchView;           
+            //var tb = (Toolbar)tv?.Parent;
+            //if (tb != null) tb.Elevation = 20f;
         }
     }
 }

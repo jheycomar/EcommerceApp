@@ -22,8 +22,11 @@ namespace EcommerceApp.Models
         public string DepartmentName { get; set; }
         public int CityId { get; set; }
         public string CityName { get; set; }
+
         [ManyToOne]
+        [ForeignKey(typeof(Company))]
         public Company Company { get; set; }
+
         public bool IsAdmin { get; set; }
         public bool IsUser { get; set; }
         public bool IsCustomer { get; set; }
