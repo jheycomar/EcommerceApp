@@ -13,7 +13,7 @@ using System.Windows.Input;
 
 namespace EcommerceApp.ViewModels
 {
-    public class ProductItemViewModel: Product, INotifyPropertyChanged
+    public class ProductItemViewModel:  INotifyPropertyChanged
     {
         #region Attributes
         private ApiService apiService;
@@ -23,7 +23,7 @@ namespace EcommerceApp.ViewModels
         #endregion
 
         #region Properties
-        public ObservableCollection<ProductItemViewModel> MenuProductos { get; set; }
+        public ObservableCollection<Product> MenuProductos { get; set; }
         
         public bool IsRefreshing
         {
@@ -48,8 +48,8 @@ namespace EcommerceApp.ViewModels
         {
             isRefreshing = false;
             apiService = new ApiService();
-            MenuProductos = new ObservableCollection<ProductItemViewModel>();
-           
+            MenuProductos = new ObservableCollection<Product>();
+            
         }
         
         #endregion
@@ -86,7 +86,7 @@ namespace EcommerceApp.ViewModels
 
             foreach (var producto in productos)
             {
-                MenuProductos.Add(new ProductItemViewModel
+                MenuProductos.Add(new Product
                 {
                     BarCode = producto.BarCode,
                     Category = producto.Category,
@@ -110,7 +110,7 @@ namespace EcommerceApp.ViewModels
         #endregion
 
         #region Commands
-        public ICommand RefreshProduct { get { return new RelayCommand(LoadProducts); } }
+       public ICommand RefreshProduct { get { return new RelayCommand(LoadProducts); } }
         #endregion
 
 #region Events
