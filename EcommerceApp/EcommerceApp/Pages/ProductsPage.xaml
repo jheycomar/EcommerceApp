@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:cv= "clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView" 
              x:Class="EcommerceApp.Pages.ProductsPage"
-              BindingContext="{Binding Main, Source={StaticResource Locator} }">
+              BindingContext="{Binding Main, Source={StaticResource Locator} }"
+             Title="Ecommerce">
     <Grid BindingContext="{Binding NewProductos}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

@@ -57,6 +57,7 @@ namespace EcommerceApp.ViewModels
         #region Methos
         public async void LoadProducts()
         {
+            IsRefreshing = true;
             if (!CrossConnectivity.Current.IsConnected)
             {  IsRefreshing = false;
                 //int millis = 1000;
@@ -66,7 +67,7 @@ namespace EcommerceApp.ViewModels
             var isreachable = await CrossConnectivity.Current.IsRemoteReachable("google.com");
             if (!isreachable)
             {
-                isRefreshing = false;
+                IsRefreshing = false;
                 await dialogService.ShowMessage("error", "verifica tu coneccion a internet");
                 return;
             }

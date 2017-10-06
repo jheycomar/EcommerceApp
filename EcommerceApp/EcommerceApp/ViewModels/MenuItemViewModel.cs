@@ -21,10 +21,14 @@ namespace EcommerceApp.ViewModels
         public string PageName { get; set; }
         #endregion
 
+        #region Constructor
         public MenuItemViewModel()
         {
             navigationService = new NavigationService();
         }
+
+        #endregion
+
         #region Commands
         public ICommand NavigateCommand { get { return new RelayCommand(Navigate); } }
         private async void Navigate()
