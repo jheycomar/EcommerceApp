@@ -11,7 +11,6 @@ namespace EcommerceApp.Models
     public  class Company
     {
         [PrimaryKey]
-        
         public int CompanyId { get; set; }
         public string Name { get; set; }
         public string Phone { get; set; }
@@ -20,12 +19,23 @@ namespace EcommerceApp.Models
         public int DepartmentId { get; set; }
         public string CityId { get; set; }
 
+       
         [OneToMany(CascadeOperations = CascadeOperation.All)]
         public List<User> Users { get; set; }
+
+        [OneToMany(CascadeOperations = CascadeOperation.All)]
+        public List<Product> Products { get; set; }
+
+        [OneToMany(CascadeOperations = CascadeOperation.All)]
+        public List<CompanyCustomer> CompanyCustomers { get; set; }
+
+        [OneToMany(CascadeOperations = CascadeOperation.All)]
+        public List<Order> Orders { get; set; }
 
         public override int GetHashCode()
         {
             return CompanyId;
         }
+
     }
 }

@@ -1,10 +1,63 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="EcommerceApp.Pages.ProductsPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin Forms!" />
-        </StackLayout>
-    </ContentPage.Content>
+             xmlns:cv= "clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView" 
+             x:Class="EcommerceApp.Pages.ProductsPage"
+              BindingContext="{Binding Main, Source={StaticResource Locator} }">
+    <Grid BindingContext="{Binding NewProductos}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <cv:CarouselView ItemsSource="{Binding MenuProductos}"  HeightRequest="200"  >
+            <cv:CarouselView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Image Grid.RowSpan="2" Aspect="Fill" Source="{Binding ImageFullPath}"/>
+                        <StackLayout Grid.Row="1" BackgroundColor="#80000000" Padding="12">
+                            <Label TextColor="White" Text="{Binding Description}" FontSize="16" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        </StackLayout>
+                    </Grid>
+                </DataTemplate>
+            </cv:CarouselView.ItemTemplate>
+        </cv:CarouselView>
+
+        <ListView Grid.Row="1" ItemsSource="{Binding MenuProductos}"  HasUnevenRows="True" IsPullToRefreshEnabled="True" 
+         RefreshCommand="{Binding RefreshProduct}"
+        IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}" >
+            <ListView.ItemTemplate >
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackLayout Padding="2,0,0,0">
+                                <Image  Source="{Binding ImageFullPath}" WidthRequest="100" HeightRequest="100"/>
+                            </StackLayout>
+                            <StackLayout Grid.Column="1" Padding="2">
+                                <Label Text="{Binding Description}" TextColor="Black" VerticalOptions="Center" />
+                                <Label Text="{Binding Remarks}" VerticalOptions="Center"/>
+                                <Label Text="{Binding Stock,StringFormat='{0:C2}'}"/>
+                                <Label Text="{Binding Price,StringFormat='{0:C2}'}" VerticalOptions="Center" TextColor="{StaticResource MenuColor}"/>
+
+                            </StackLayout>
+                            <StackLayout Grid.Column="2">
+                                <Switch IsToggled="{Binding IsActive}"/>
+
+                            </StackLayout>
+                        </Grid>
+
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
 </ContentPage>

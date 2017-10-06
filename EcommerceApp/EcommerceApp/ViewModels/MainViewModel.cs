@@ -1,5 +1,6 @@
 ﻿using EcommerceApp.Models;
 using EcommerceApp.Services;
+using Plugin.Connectivity;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,27 +13,38 @@ namespace EcommerceApp.ViewModels
     public class MainViewModel
     {
         #region Attributes
-        private DateService dateService; 
+        private DateService dateService;
+        private ApiService apiService;
+        private DialogService dialogService;
         #endregion
 
         #region Properties
         public ObservableCollection<MenuItemViewModel> Menu { get; set; }
+       
         public LoginViewModel Newlogin { get; set; }
         public UserViewModel UserLoget { get; set; }
+        public ProductItemViewModel NewProductos { get; set; }
 
         #endregion
 
         #region constructor
         public MainViewModel()
-        {
+        {   //singleton
             instance = this;
-            Menu = new ObservableCollection<MenuItemViewModel>();
+            Menu = new ObservableCollection<MenuItemViewModel>();          
             Newlogin = new LoginViewModel();
             UserLoget = new UserViewModel();
+            //services
             dateService = new DateService();
+            apiService = new ApiService();
+            dialogService = new DialogService();
+
             LoadMenu();
+          
            
         }
+
+       
 
 
         #endregion
@@ -92,7 +104,9 @@ namespace EcommerceApp.ViewModels
                 Title = "Cerrar sesion",
             });
         }
+             
         #endregion
+
         #region Singleton
 
         static MainViewModel instance;

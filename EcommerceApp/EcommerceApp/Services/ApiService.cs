@@ -112,6 +112,31 @@ namespace EcommerceApp.Services
             }
         }
 
+       public async  Task<List<Product>> GetProducts()
+        {
+            try
+            {
+                var client = new HttpClient();
+                client.BaseAddress = new Uri("http://ecomerce.somee.com");
+                var url = "/api/Products";
+                var response = await client.GetAsync(url);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return null;
+                }
+
+                var result = await response.Content.ReadAsStringAsync();
+                var list = JsonConvert.DeserializeObject<List<Product>>(result);
+
+                return list;
+            }
+            catch 
+            {
+                return null;
+            }
+        }
+
         public async Task<Response> Post<T>(string urlBase, string servicePrefix, string controller, T model)
         {
             try

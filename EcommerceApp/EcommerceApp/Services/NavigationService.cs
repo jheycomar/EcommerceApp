@@ -32,6 +32,8 @@ namespace EcommerceApp.Services
                     await App.Navigator.PushAsync(new OrdersPage());
                     break;
                 case "ProductsPage":
+                    var mainViewModel = MainViewModel.GetInstance();
+                    mainViewModel.NewProductos = new ProductItemViewModel();
                     await App.Navigator.PushAsync(new ProductsPage());
                     break;
                 case "SetupPage":
