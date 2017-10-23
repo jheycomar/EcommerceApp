@@ -15,15 +15,16 @@ namespace EcommerceApp.Pages
     {
         public ProductsPage()
         {
+
+            var mainViewModel = MainViewModel.GetInstance();
+            base.Appearing += (object sender, EventArgs e) =>
+            {
+                mainViewModel.RefreshProductCommand.Execute(this);
+            };
             InitializeComponent();
           
         }
-        protected override void OnAppearing()
-        {
-            var mainViewModel = MainViewModel.GetInstance();
-            mainViewModel.NewProductos.RefreshProduct.Execute(this);
-            base.OnAppearing();
-        }
+      
 
     }
 }

@@ -39,6 +39,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Clases\Response.cs" />
+    <Compile Include="Controls\HorizontalList.cs" />
     <Compile Include="Date\DataAccess.cs" />
     <Compile Include="Infrastructure\InstanceLocator.cs" />
     <Compile Include="Interfaces\IConfig.cs" />
@@ -93,6 +94,9 @@
     <Compile Include="Services\DateService.cs" />
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="Services\NavigationService.cs" />
+    <Compile Include="Templates\MovieItemTemplate.xaml.cs">
+      <DependentUpon>MovieItemTemplate.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\MenuItemViewModel.cs" />
@@ -231,6 +235,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Pages\LoginPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Templates\MovieItemTemplate.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

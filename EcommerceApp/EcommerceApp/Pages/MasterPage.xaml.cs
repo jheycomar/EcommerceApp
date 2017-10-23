@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EcommerceApp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,12 +16,14 @@ namespace EcommerceApp.Pages
         public MasterPage()
         {
             InitializeComponent();
+           
         }
         protected override void OnAppearing()
         {
             base.OnAppearing();
             App.Master = this;
             App.Navigator = Navigator;
+
         }
     }
 }

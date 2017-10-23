@@ -3,31 +3,28 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:cv= "clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView" 
              x:Class="EcommerceApp.Pages.ProductsPage"
+             xmlns:hori="clr-namespace:EcommerceApp.Controls" 
+             xmlns:templates="clr-namespace:EcommerceApp.Templates"
               BindingContext="{Binding Main, Source={StaticResource Locator} }"
              Title="Ecommerce">
-    <Grid BindingContext="{Binding NewProductos}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <cv:CarouselView ItemsSource="{Binding MenuProductos}"  HeightRequest="200"  >
-            <cv:CarouselView.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Image Grid.RowSpan="2" Aspect="Fill" Source="{Binding ImageFullPath}"/>
-                        <StackLayout Grid.Row="1" BackgroundColor="#80000000" Padding="12">
-                            <Label TextColor="White" Text="{Binding Description}" FontSize="16" HorizontalOptions="Center" VerticalOptions="Center"/>
-                        </StackLayout>
-                    </Grid>
-                </DataTemplate>
-            </cv:CarouselView.ItemTemplate>
-        </cv:CarouselView>
 
-        <ListView Grid.Row="1" ItemsSource="{Binding MenuProductos}"  HasUnevenRows="True" IsPullToRefreshEnabled="True" 
+    <ScrollView>
+       
+    <StackLayout >
+            <ActivityIndicator HorizontalOptions="Center" VerticalOptions="Center" IsRunning="{Binding IsRefreshing}"/>
+         <Label Text="Productos" />
+        <hori:HorizontalList ListOrientation="Horizontal" ItemsSource="{Binding MenuProductos}"  SelectedCommand="{Binding DetailCommand}"
+                 HeightRequest="220">
+
+            <hori:HorizontalList.ItemTemplate >
+                <DataTemplate>
+                    <templates:MovieItemTemplate />
+                </DataTemplate>
+            </hori:HorizontalList.ItemTemplate>
+        </hori:HorizontalList>
+        
+        
+        <ListView  ItemsSource="{Binding MenuProductos}"  HasUnevenRows="True" IsPullToRefreshEnabled="True" 
          RefreshCommand="{Binding RefreshProduct}"
         IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}" >
             <ListView.ItemTemplate >
@@ -54,11 +51,11 @@
                                 <Switch IsToggled="{Binding IsActive}"/>
 
                             </StackLayout>
-                        </Grid>
-
+                        </Grid>                       
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-    </Grid>
+    </StackLayout>
+    </ScrollView>
 </ContentPage>

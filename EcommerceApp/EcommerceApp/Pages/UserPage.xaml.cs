@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EcommerceApp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +15,16 @@ namespace EcommerceApp.Pages
     {
         public UserPage()
         {
+            var mainViewModel = MainViewModel.GetInstance();
+            base.Appearing += (object sender, EventArgs e) =>
+            {
+                mainViewModel.RefreshProductCommand.Execute(this);
+            };
             InitializeComponent();
+
+           
         }
+       
+
     }
 }

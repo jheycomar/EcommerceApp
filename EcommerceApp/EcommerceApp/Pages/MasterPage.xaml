@@ -2,15 +2,17 @@
 <MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EcommerceApp.Pages.MasterPage"
-            xmlns:pages="clr-namespace:EcommerceApp.Pages;assembly=EcommerceApp">
+            xmlns:pages="clr-namespace:EcommerceApp.Pages;assembly=EcommerceApp"
+             MasterBehavior="Popover"
+             BindingContext="{Binding Main, Source={StaticResource Locator} }">
 
     <MasterDetailPage.Master>
         <pages:MenuPage></pages:MenuPage>
     </MasterDetailPage.Master>
     <MasterDetailPage.Detail>
-        <NavigationPage x:Name="Navigator" BarBackgroundColor="{StaticResource MainColor}">
+        <NavigationPage x:Name="Navigator" BarBackgroundColor="{StaticResource MainColor}" >
             <x:Arguments>
-                <pages:UserPage></pages:UserPage>
+                <pages:ProductsPage></pages:ProductsPage>
             </x:Arguments>
         </NavigationPage>
     </MasterDetailPage.Detail>

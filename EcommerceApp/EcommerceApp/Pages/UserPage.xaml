@@ -2,24 +2,66 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EcommerceApp.Pages.UserPage"
-             Title="UserPage" BackgroundColor="{StaticResource BackgroundColor}"
-              BindingContext="{Binding Main, Source={StaticResource Locator}}"
-               xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions">
+             Title="UserPage" BackgroundColor="{StaticResource BackgroundColor}" 
+             xmlns:hori="clr-namespace:EcommerceApp.Controls" 
+             xmlns:templates="clr-namespace:EcommerceApp.Templates"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}" >
+
+    <ScrollView>
+
+        <StackLayout >
+
+            <Label Text="Productos" />
+            <hori:HorizontalList ListOrientation="Horizontal" ItemsSource="{Binding MenuProductos}"  SelectedCommand="{Binding DetailCommand}"
+                 HeightRequest="220">
+
+                <hori:HorizontalList.ItemTemplate >
+                    <DataTemplate>
+                        <templates:MovieItemTemplate />
+                    </DataTemplate>
+                </hori:HorizontalList.ItemTemplate>
+            </hori:HorizontalList>
+
+
+            <ListView  ItemsSource="{Binding MenuProductos}"  HasUnevenRows="True" IsPullToRefreshEnabled="True" 
+         RefreshCommand="{Binding RefreshProduct}"
+        IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}" >
+                <ListView.ItemTemplate >
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackLayout Padding="2,0,0,0">
+                                    <Image  Source="{Binding ImageFullPath}" WidthRequest="100" HeightRequest="100"/>
+                                </StackLayout>
+                                <StackLayout Grid.Column="1" Padding="2">
+                                    <Label Text="{Binding Description}" TextColor="Black" VerticalOptions="Center" />
+                                    <Label Text="{Binding Remarks}" VerticalOptions="Center"/>
+                                    <Label Text="{Binding Stock,StringFormat='{0:C2}'}"/>
+                                    <Label Text="{Binding Price,StringFormat='{0:C2}'}" VerticalOptions="Center" TextColor="{StaticResource MenuColor}"/>
+
+                                </StackLayout>
+                                <StackLayout Grid.Column="2">
+                                    <Switch IsToggled="{Binding IsActive}"/>
+
+                                </StackLayout>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ScrollView>
+
+
     <ContentPage.ToolbarItems>
-        <ToolbarItem Name="inicio" Order="Secondary" Priority="0"/>
+        <ToolbarItem Name="inicio" Order="Secondary" Priority="0" Command="{Binding RefreshProductCommand}"/>
         <ToolbarItem Name="menu" Order="Secondary" Priority="2"/>
 
     </ContentPage.ToolbarItems>
-    
-    
-    <ContentPage.Content>
-        <StackLayout VerticalOptions="CenterAndExpand" Padding="8" BindingContext="{Binding UserLoget}">
-            <Label Text="Welcomen" FontAttributes="Bold" FontSize="18" VerticalOptions="Center" HorizontalOptions="Center"/>
-            <Label Text="{Binding FullName}" FontAttributes="Bold" FontSize="18" VerticalOptions="Center" HorizontalOptions="Center"/>           
-            <controls:CircleImage  Source="{Binding Photo }" Margin="2" Aspect="AspectFill"
-                      WidthRequest="150" HeightRequest="150"
-                      HorizontalOptions="Center" VerticalOptions="Center">
-            </controls:CircleImage>
-        </StackLayout>
-    </ContentPage.Content>
 </ContentPage>

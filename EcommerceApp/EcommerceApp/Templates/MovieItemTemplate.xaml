@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EcommerceApp.Templates.MovieItemTemplate"  
+             BindingContext="{Binding Main, Source={StaticResource Locator} }">
+
+   
+        <Frame Margin="6" WidthRequest="100" HeightRequest="210">
+            <Grid  >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Image Grid.Row="0" Aspect="Fill" Source="{Binding ImageFullPath}"  HeightRequest="50" WidthRequest="100"/>
+                <StackLayout Grid.Row="1"  Padding="2">
+                    <Label Text="{Binding Description}" FontSize="16" TextColor="Black" VerticalOptions="Center" />                   
+                    <Label Text="{Binding Price,StringFormat='{0:C2}'}" VerticalOptions="Center" TextColor="{StaticResource MenuColor}"/>
+
+                </StackLayout>
+            </Grid>
+        </Frame>
+       
+</ContentView>
